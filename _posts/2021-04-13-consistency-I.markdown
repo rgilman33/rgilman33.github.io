@@ -6,7 +6,7 @@ categories: consistency-training
 ---
 
 <link rel="stylesheet" href="/assets/css/styles.css">
-
+test
 Consistency training is a slippery concept. All the subfields of ML use it, but they each call it something different. Researchers have been doing it since the 19th century, yet they still rediscover it on a yearly basis. Once you recognize it you’ll see it everywhere.
 
 It may be hard to pin down when folks are doing consistency training, but it’s worth getting the concept right: it’s powering the current [revolution in self-supervised learning](https://towardsdatascience.com/the-quiet-semi-supervised-revolution-edec1e9ad8c) for computer vision. It’s how [OpenAI’s CLIP](https://openai.com/blog/clip/) learns a zero-shot classifier. It’s the best way we know of doing domain-adaptation. It’s what makes dropout and data augmentation work.
