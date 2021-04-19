@@ -22,7 +22,7 @@ As we covered in [the intro]({% post_url 2021-04-13-consistency-I %}), consisten
 
 ## Output shaping
 
-Let’s return to our toy dataset from [part II]({% post_url 2021-04-13-consistency-II %}) to show how output shaping and consistency training can solve an even simpler task than the lane-follower above: halfmoons classification. Like last time, the data team gave a dataset that we know is composed of two classes, bananas and plums. But this time they won’t be able to give us *any* labels. 
+Let’s return to our toy dataset from [part II]({% post_url 2021-04-13-consistency-II %}) to show how output shaping and consistency training can solve an even simpler task than the lane-follower above: halfmoons classification. Like last time, the data team gave a dataset that we know is composed of two classes, bananas and plums. But this time they won’t be able to give us *any* labels. The code for this example is at [this Colab](https://colab.research.google.com/drive/1zrYT4BAhCvEeEAqHD4HS4-H4aSZ73294#scrollTo=GtvrCmLsy9SE){:target="_blank"}.
 
 ![Unlabeled halfmoons dataset](/assets/img/beyond_invariance_unlabeled_halfmoons.png)
 

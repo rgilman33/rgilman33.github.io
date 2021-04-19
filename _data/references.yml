@@ -202,7 +202,7 @@
 
 - key: noisy_student
   authors: Xie, Q., Luong, M.-T., Hovy, E., & Le, Q. V. 
-  year: 999
+  year: 2019
   title: Self-training with Noisy Student improves ImageNet classification
   description: Mean Teacher on steroids. SOTA on imagenet for a few years. Starts with a totally pretrained teacher model compared to vanilla mean teacher which trains both in tandem. Instead of an EMA teacher, periodically replaces the teacher with the student. Only does augs on the student’s data.
   notes: >
@@ -230,7 +230,7 @@
 
 - key: clip
   authors: Radford, A., Kim, J. W., Hallacy, C., Ramesh, A., Goh, G., Agarwal, S., Sastry, G., Askell, A., Mishkin, P., Clark, J., Krueger, G., & Sutskever, I. 
-  year: 999
+  year: 2021
   title: Learning Transferable Visual Models From Natural Language Supervision
   description: CLIP from OpenAI. Standard consistency training using the NCE loss in a cross-modal setting, text and images. Trained on a large dataset of internet images and their corresponding captions. NCE objective gives ability for cross modal lookup, allowing a zero-shot classifier similar to the earlier work on siamese networks for face and signature verification. CLIP is a scaled up version of Con-VIRT (Zhang et al., 2020),
   notes: > 
@@ -269,7 +269,7 @@
   
 - key: byol
   authors: Grill, J.-B., Strub, F., Altché, F., Tallec, C., Richemond, P. H., Buchatskaya, E., Doersch, C., Pires, B. A., Guo, Z. D., Azar, M. G., Piot, B., Kavukcuoglu, K., Munos, R., & Valko, M. 
-  year: 999
+  year: 2020
   title: "Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning"
   description: Mean Teacher but in the semi-supervised setting and with a pred head, which is just an extra MLP on the student network to add asymmetry. Calls the siamese twins “online” and “target” rather than “student” and “teacher”. Not really "new" like the title says
   notes: >
@@ -291,7 +291,7 @@
 
 - key: simsiam
   authors: Chen, X., & He, K. 
-  year: 999
+  year: 2020
   title: Exploring Simple Siamese Representation Learning
   description: SimSiam. 'All you need is stopgrad + pred head.' Vanilla consistency training. No EMA like mean teacher, just two symmetrical models like in horseshoe or transformation/stability. Applied in the unsupervised setting. Just does MSE on the features.
   notes: >
@@ -301,7 +301,7 @@
 
 - key: nat
   authors: Bojanowski, P., & Joulin, A. 
-  year: 999
+  year: 2017
   title: Unsupervised Learning by Predicting Noise
   description: Noise as Targets (NAT). Enforces consistency training against random fixed targets. If as many targets as images in dataset, that’s Exemplar. If fewer, that’s the clustering approaches like swav.
 
@@ -333,13 +333,13 @@
 
 - key: bachman_
   authors: Bachman, P., & Alsharif, O. 
-  year: 999
+  year: 2014
   title: Learning with Pseudo-Ensembles
   description: Early modern work in consistency training. Implements different views with different "child networks", which appear to be just dropout. Also does entmin.
 
 - key: cmc
   authors: Tian, Y., Krishnan, D., Research, G., & Isola, P.
-  year: 999
+  year: 2019
   title: Contrastive Multiview Coding
   description: CMC. Multi-modal contrastive learning using different color channels. 
     "Given a dataset of RGB images, we convert themto theLabimage color space, and split each image intoLandabchannels, as originally proposed in SplitBrain autoen-coders [85]. During contrastive learning, L and ab from thesame image are treated as the positive pair, and ab channelsfrom other randomly selected images are treated as a neg-ative pair"
@@ -351,7 +351,7 @@
 
 - key: exemplar
   authors: Dosovitskiy, A., Fischer, P., Springenberg, T., Riedmiller, M., & Brox, T.
-  year: 999
+  year: 2014
   title: Discriminative Unsupervised Feature Learning with Exemplar Convolutional Neural Networks
   description: Exemplar. Early modern work that parented the following work in instance discrimination. Contrastive consistency training using a monster softmax, one output for each seed image in the dataset. 
   notes: >
@@ -361,12 +361,13 @@
 
 - key: moco
   authors: He, K., Fan, H., Wu, Y., Xie, S., & Girshick, R.
-  year: 999
+  year: 2019
   title: Momentum Contrast for Unsupervised Visual Representation Learning
   description: MoCo. Just adds a queue and mean teacher style “momentum encoder” to He (_). Essentially NCE with mean teacher. Queue is to get around large batch sizes without doing a monster softmax like Exemplar.
 
 - key: pirl
   authors: Misra, I., & Van Der Maaten, L.
+  year: 2019
   title: Self-Supervised Learning of Pretext-Invariant Representations
   description: PIRL. Consistency training with NCE objective where different views are different jigsaw permutations. 
     Motivation was to demonstrate the superiority of consistency training vs pretext tasks in a fair bake off, hence the jigsaw data aug. Consistency training wins. 
@@ -381,12 +382,13 @@
 
 - key: mixmatch
   authors: Berthelot, D., Research, G., Carlini, N., Goodfellow, I., Oliver, A., Papernot, N., & Raffel, C. 
+  year: 2019
   title: "MixMatch: A Holistic Approach to Semi-Supervised Learning"
   description: Consistency training for semi-supervised learning. Uses symmetrical siamese network. Also adds in entmin. Novel in that it uses Mixup in addition to standard data aug to get views.
 
 - key: uda
   authors: Xie, Q., Dai, Z., Hovy, E., Luong, M.-T., & Le, Q. V. 
-  year: 999
+  year: 2019
   title: Unsupervised Data Augmentation for Consistency Training
   description: Consistency training for semi-supervised learning using symmetrical siamese network. 
     Not actually novel but excellent representative work, well written with great conceptual overview of how consistency training works. One of the best in the genre. 
@@ -409,7 +411,7 @@
 
 - key: deepcluster
   authors: Caron, M., Bojanowski, P., Joulin, A., & Douze, M. 
-  year: 999
+  year: 2018
   title: Deep Clustering for Unsupervised Learning of Visual Features
   description: Deepcluster. Consistency training using clustering.
   notes: >
@@ -445,7 +447,7 @@
 
 - key: swav
   authors: Caron, M., Misra, I., Mairal, J., Goyal, P., Bojanowski, P., & Joulin, A. 
-  year: 999
+  year: 2020
   title: Unsupervised Learning of Visual Features by Contrasting Cluster Assignments
   description: SwAV, parent of SEER, child of Deepcluster.
     Deepcluster but compares simultaneously within batch rather than across epoch.
@@ -462,7 +464,7 @@
 
 - key: laine_aila
   authors: Laine, S., & Aila, T.
-  year: 999
+  year: 2016
   title: TEMPORAL ENSEMBLING FOR SEMI-SUPERVISED LEARNING
   description: Canonical work in early modern consistency training for semi-supervised learning. The horseshoe model is the classic symmetrical siamese setup while the EMA model is precursor to Mean Teacher.
   notes: >
@@ -475,7 +477,7 @@
 
 - key: mean_teacher
   authors: Tarvainen, A., & Valpola, H.
-  year: 999
+  year: 2017
   title: "Mean teachers are better role models: Weight-averaged consistency targets improve semi-supervised deep learning results."
   description: Refines Laine and Aila’s EMA into Mean Teacher, the canonical example from the asymmetrical EMA siamese family. Consistency training from semi-supervised learning. Uses dropout and basic data aug.
   notes: >
@@ -518,13 +520,13 @@
 
 - key: cpc
   authors: van den Oord DeepMind, A., Li DeepMind, Y., & Vinyals DeepMind, O.
-  year: 999
+  year: 2018
   title: Representation Learning with Contrastive Predictive Coding
   description: CPC. Consisteny training for SSL. Uses complex gridification for crops. 
 
 - key: wu_
   authors: Wu, Z., Xiong, Y., Yu, S. X., & Lin, D. 
-  year: 999
+  year: 2018
   title: "Unsupervised Feature Learning via Non-Parametric Instance Discrimination"
   description: Adds a queue to get around Exemplar's softmax. Uses NCE loss. 
 

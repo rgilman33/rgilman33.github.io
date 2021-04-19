@@ -8,7 +8,7 @@ categories: consistency-training
 
 In consistency training we’re not mapping from inputs to outputs like in supervised learning. The only thing we're telling the model is to **respond in the same way to different perturbations of the same input image**. We're not telling the model *how* to behave at all, we’re simply telling it to *behave consistently*. 
 
-How on Earth does that create useful features? We'll explain with another example. 
+How on Earth does that create useful features? We'll explain with another example. The code is at [this Colab](https://colab.research.google.com/drive/1e5Xuje96cYlR38zmgzbw8aXm8AhdX58A#scrollTo=0tnFEXzh44mV){:target="_blank"}.
 
 You’ve been given the task of creating a banana vs. plum classifier. Just those two classes. You only have unlabeled data to start with, but you can expect to get a small amount of labels soon. 
 

@@ -130,6 +130,7 @@ Note the two components of the objective. The numerator pulls different views fr
 In our psuedocode above we looped through all our pairs of images. In reality, we'd compute a similarity matrix. We try to maximize the diagonal and minimize the rest.
 
 ![Consistency training basic setup](/assets/img/rudy_machine_learning_diagrams_03_500x.png)
+
 <span class="img_text"> The NCE loss computes a similarity matrix between two differently-augmented views of the same underlying seed batch. We want views from the same seed image---"positives"---to be treated as identical, and views from different seed images---"negatives"---to be pushed apart.</span>
 
 The tough question when implementing a `NCE`-like loss is where you get your negatives. The dispersal term in the denominator requires a lot of negatives examples to work well. I mentioned a firehose of research---a big portion of that is just focused on how to handle the negative examples!
@@ -175,8 +176,6 @@ The contrastive losses above are able to prevent collapse, but their mechanism o
 
 ![Consistency training basic setup](/assets/img/rudy_machine_learning_diagrams_03_500x.png)
 <span class="img_text"> Barlow Twins tries to maximize the correlation between positives and minimize it between negatives. Like NCE but correlation instead of similarity---I even reused the same sketch!</span>
-
-TODO(this is still a lot of pairwise calculations. Do we understand this right?)
 
 {% include ref.html key="barlow" text="Barlow Twins"%} encourages this decorrelation of negatives as a soft constraint, but you can also just do the decorrelation explicitly and manually like {% include ref.html key="whitening" text="Ermolov et al." %} This is called “whitening”. It’s like a supercharged batchnorm: instead of just normalizing along the batch dimension you also *decorrelate* along the batch dimension. This does explicitly what {% include ref.html key="barlow" text="Barlow Twins"%} trains indirectly. They pair this "negatives-scattering" effect with a `MSE` loss on the positives. 
 
@@ -265,7 +264,7 @@ They generally implement some variant of the augs used by {% include ref.html ke
 
 <span class="img_text">The set of augmentations tested by SimCLR. They found crop + color jitter to be the most effective.</span>
 
-Some methods mix this up a bit but still essentially just do standard data augmentation. {% include ref.html key="swav" text="SwAV" %} takes five TODO crops at multiple resolutions rather than two at the same resolution, imparting a nice scale invariance to the model. {% include ref.html key="uda" text="UDA" %} does RandAugment. TODO {% include ref.html key="mixmatch" text="MixMatch"%} adds mixup. {% include ref.html key="fixmatch" text="FixMatch" %} does a weak augmentation (flip and shift) as a target, then trains towards that using strong augmentation (full set of augmentations), mimicking the benefits of a teacher network as a provider of stable targets. {% include ref.html key="pirl" text="PIRL" %} shuffles the image jigsaw-style to do a fair bake-off with old-school pretext task training. The original work in consistency training from {% include ref.html key="becker_1992" text="Becker and Hinton" %} simply takes neighboring crops.
+Some methods mix this up a bit but still essentially just do standard data augmentation. {% include ref.html key="swav" text="SwAV" %} takes multiple crops at different resolutions rather than two at the same resolution, imparting a nice scale invariance to the model. {% include ref.html key="uda" text="UDA" %} does RandAugment. {% include ref.html key="mixmatch" text="MixMatch"%} adds mixup. {% include ref.html key="fixmatch" text="FixMatch" %} does a weak augmentation (flip and shift) as a target, then trains towards that using strong augmentation (full set of augmentations), mimicking the benefits of a teacher network as a provider of stable targets. {% include ref.html key="pirl" text="PIRL" %} shuffles the image jigsaw-style to do a fair bake-off with old-school pretext task training. The original work in consistency training from {% include ref.html key="becker_1992" text="Becker and Hinton" %} simply takes neighboring crops.
 
 Interestingly, {% include ref.html key="byol" text="BYOL" %} even brags that their setup is “robust to data aug”, which is essentially saying they don’t have fine-grained control over how their data augmentations create invariances in their features. 
 
@@ -303,7 +302,7 @@ In face detection and signature verification, the invariant features *are* the d
 
 Instead of perturbing the same set of input properties in multiple ways, you could split your input properties into disjoint sets of features. This could be color channels in an image, different columns in tabular data, or entirely different modalities like audio, text or images. These are identical to the unimodal examples above, the only difference is in how they grab their views. Most use the `NCE` loss or something like it.
 
-{% include ref.html key="cmc" text="CMC"%} is of the same lineage as the {% include ref.html key="simclr" text="SimCLR" %} crowd but uses different color channels for their different views. This is a fun idea, but it makes you wonder: what invariance were they hoping to impart? In a real project, for example, if you decide that color isn’t important for your task then you just collapse your image to grayscale as a preprocessing step. No need to go through all the trouble of setting up invariance training if you can just remove the variability manually. (TODO think about this more. Is there benefit?)
+{% include ref.html key="cmc" text="Contrastive Multiview Coding (CMC)"%} is of the same lineage as the {% include ref.html key="simclr" text="SimCLR" %} crowd but uses different color channels for their different views. This is a fun idea, but it makes you wonder: what invariance were they hoping to impart? In a real project, for example, if you decide that color isn’t important for your task then you just collapse your image to grayscale as a preprocessing step. No need to go through all the trouble of setting up invariance training if you can just remove the variability manually.
 
 There’s a lot of work going under the banner audio-visual correspondence (AVC) that does cross-modal consistency training using the *audio* and *visual* channels of video. This includes {% include ref.html key="alwassel_2020" text="XDC," %} which is essentially a multimodal {% include ref.html key="deepcluster" text="Deepcluster." %} In addition to the consistency training, {% include ref.html key="objects_that_sound" text="Objects that Sound"%} splits the image into a grid of small patches and scores them separately. This allows them to predict which items in a given image are making a sound.
 
