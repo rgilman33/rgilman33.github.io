@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Consistency training II: How does it work?"
+description: "An intuitive guide to consistency training (i.e. contrastive learning, energy-based modelling, invariance training)"
 date:   2021-04-14
 categories: consistency-training
 ---

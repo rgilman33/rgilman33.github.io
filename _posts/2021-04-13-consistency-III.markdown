@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Consistency training III: An Engineer's Guide to the Literature"
+description: "An intuitive guide to the consistency training literature (i.e. contrastive learning, energy-based modelling, invariance training)."
 date:   2021-04-14
 categories: consistency-training
 ---

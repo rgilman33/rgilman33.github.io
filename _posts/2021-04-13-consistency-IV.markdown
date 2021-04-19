@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Consistency training IV: Beyond invariance"
+description: "Consistency training (i.e. contrastive learning) goes beyond simply creating invariances across data augmentations."
 date:   2021-04-14
 categories: consistency-training
 ---
