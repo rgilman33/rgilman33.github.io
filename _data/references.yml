@@ -1,0 +1,541 @@
+- key: chopra_2005
+  authors: Chopra, S., Hadsell, R., & Lecun, Y.
+  year: 2005
+  title: Learning a Similarity Metric Discriminatively, with Application to Face Verification
+  description: "One of the first instances of the modern NCE-like loss. Classic work applying consistency training to face identification."
+  notes: >
+    Highlights the logistical benefits of the contrastive loss as like a dynamic softmax. Don’t have to know the number of outputs beforehand.
+    First time I’ve seen “energy based models” mentioned, they cite that as main difference with LeCun’s first work in siamese networks.
+
+- key: nca
+  authors: Goldberger, J., Roweis, S., Hinton, G., & Salakhutdinov, R. 
+  year: 2004
+  title: Neighbourhood Components Analysis
+  description: Early work in consistency training, applied to face detection. Does rotation and blur for augmentations. Uses contrastive loss.
+
+- key: alwassel_2020
+  authors: Alwassel, H., Mahajan, D., Korbar, B., Torresani, L., Ghanem, B., & Tran, D. 
+  year: 2020
+  title: Self-Supervised Learning by Cross-Modal Audio-Video Clustering
+  description: "Audio visual cross-modal consistency training. Novel in that they use clustering on the audio channel. Essentially a multimodal deepcluster."
+  notes: >
+    "Cross-Modal Deep Clustering (XDC), a novel self-supervised method that 
+    leverages unsupervised clustering in one modality (e.g.,audio) as a supervisory signal 
+    for the other modality (e.g. video)"
+    "All three of our cross-modal methods yield representations that generalize better
+     to the downstream tasks of action recognition and audio classification, compared 
+     to their within-modality counterparts"
+
+- key: objects_that_sound
+  authors: Arandjelovic, R. A., & Zisserman, A. 
+  year: 2018
+  title: Objects that Sound
+  description: Multimodal consistency training, audio and visual.
+  notes: >
+    “Networks audio and visual inputs into a common space that is suitable for cross-modal retrieval; and second, a network that can localize the object that sounds in an image, given the audio signal. We achieve both these objectives by training from unlabelled video using only audio-visual correspondence(AVC) as the objective function. This is a form of cross-modal self-supervision from video”
+    Finds the sounding object by breaking into regions and scoring separately, like in object detection. 
+    Also has “a cautionary tale on how to avoid undesirable shortcuts in the data preparation”. 
+
+- key: fixmatch
+  authors: Sohn, K., Berthelot, D., Li, C.-L., Zhang, Z., Carlini, N., Cubuk, E. D., … Raffel, C.
+  year: 2020
+  title: FixMatch, Simplifying Semi-Supervised Learning with Consistency and Confidence
+  description: "FixMatch first generates pseudo-labels using the model’s predictions on weakly-augmented unlabeled images. For a given image, the pseudo-label is only retained if the model produces a high-confidence prediction.  The model is then trained to predict the pseudo-label when fed a strongly-augmented version of the same image."
+  notes: >
+    Semi-supervised consistency training using hard labels. Also novel in the sense that it does a weak aug as target, then a strong aug to train towards that. “When we replaced the weak augmentation for label guessing with strong augmentation, we found that the model diverged early in training". Similar to the sense that a stable teacher provides better targets towards which a student can train
+    Weight-decay found to be important, as elsewhere in consistency training. Also found optimizer choice to be important, SGD over Adam, though I’m not sure the mechanism.
+    Simplified version of UDA. Removed training signal annealing and entmin sharpening. 
+
+
+- key: noroozi_2018
+  authors: Noroozi, M., Vinjimoor, A., Favaro, P., & Pirsiavash, H. 
+  year: 2018
+  title: Boosting Self-Supervised Learning via Knowledge Transfer
+  description: Consistency training with clustering. Deepcluster but first initializes with a pretext task, in this case jigsaw, whereas deepcluster simply bootstrapped from scratch. A convoluted process. First do pretext task to get the features going, then cluster based on those, then pred those hard cluster assignments as another pretext task. 
+  notes: >
+    They use a smaller model for the last step. They use hard cluster assignments rather than the activations in an attempt to lose information. I believe this is for the same reason we have to throw away pretext heads, and even consistency methods find it beneficial to throw a few top layers away. they contain information about the pretext task that we don’t care about.
+    This all strikes me as pretty “extra”. Just fancied-up consistency training. The goal is to get rid of the task-specific things from pretraining, i.e. to get invariance, so why not just ditch the pretext task entirely?
+    Same as Clusterfit.
+
+- key: meta_psuedo_labels
+  authors: Pham, H., Dai, Z., Xie, Q., Luong, M.-T., & Le, Q. V.
+  year: 2020
+  title: Meta Pseudo Labels
+  description: Same as Noisy Student except the teacher now adapts to the student, and the teacher does consistency training ala UDA at the same time. Student trains on hard labels from the teacher.
+  notes: >
+    Not quite sure how teacher is training on student’s performance here. Appears similar to metalearning.
+
+- key: chopra_2005
+  authors: Chopra, S., Hadsell, R., & Lecun, Y. 
+  year: 2005
+  title: Learning a Similarity Metric Discriminatively, with Application to Face Verification
+  description: One of the first instances of the modern NCE-like loss. Classic work applying consistency training to face identification. 
+  notes: >
+    Highlights the logistical benefits of the contrastive loss as like a dynamic softmax. Don’t have to know the number of outputs beforehand.
+    First time I’ve seen “energy based models” mentioned, they cite that as main difference with LeCun’s first work in siamese networks.
+
+- key: nca
+  authors: Goldberger, J., Roweis, S., Hinton, G., & Salakhutdinov, R.
+  year: 2004
+  title: Neighbourhood Components Analysis
+  description: Early work in consistency training, applied to face detection. Does rotation and blur for augmentations. Uses contrastive loss.
+
+- key: clusterfit
+  authors: Yan, X., Misra, I., Gupta, A., Ghadiyaram, D., & Mahajan, D. 
+  year: 2019
+  title: "ClusterFit: Improving Generalization of Visual Representations"
+  description: Deepcluster but with a pretext task first. Same as Noroozi but with soft cluster assignment. Cluster based consistency training.
+  notes: >
+    “We  believe  that  “cluster” followed by “fit” weakens the underlying pre-training objective-specific bias.  One may view ClusterFit from an information bottleneck perspective wherein the lossy clustering step introduces a bottleneck and removes any pre-training proxy objective bias”
+    Uses jigsaw and rotation for pretext tasks.
+
+- key: morgado_2021
+  authors: Morgado, P., San, U. C., Nuno, D., Uc, V., Diego, S., & Misra, I. 
+  year: 2021
+  title: Audio-Visual Instance Discrimination with Cross-Modal Agreement
+  description: Vanilla consistency training for audio-visual correspondence.
+
+- key: zhang_2021
+  authors: Zhang, Z., Girdhar, R., Joulin, A., & Misra, I. 
+  year: 2021
+  title: Self-Supervised Pretraining of 3D Features on any Point-Cloud
+  description: Vanilla consistency training for 3d depth maps. Using different formats of the same underlying data, which is not technically “multimodal” though the model would perceive it as such. Different formats are point clouds, voxels, meshes.
+  notes: >
+    Also uses MOCO style encoder and queue for negatives.
+    "Data augmentation is as an essential component of our framework.  We first adopt standard point cloud data augmentations  methods which  are  random point up/down sampling, random flip in xy axis, and random rotation.  However,  after adding these methods,  it is still  easy  for  the  network  to  distinguish  different  training instances.  Thus, we add two new data augmentation meth-ods: random cuboid and random drop patches.  Inspired by the  random  crop  in  2D  images"
+
+- key: becker_1992
+  authors: Becker, S., & Hinton, G. E. 
+  year: 1992
+  title: Self-organizing neural network that discovers surfaces in random-dot stereograms
+  description: The very first work using consistency training for neural networks. PDF is so old can’t even add highlights to it!
+  notes: >
+    Looks at adjacent patches in images. Does contrastive loss, but not of the NCE form. A type of loss I haven’t seen ever since, Barlow Twins claimed to have tried it and not gotten it to work. Same motivation, attraction of positives and repellent of negatives. 
+    Notes the instability of MSE, potential for collapse.
+    Frames consistency training in terms of mutual information, in that it “forces the modules to extract as pure as possible a signal of the two underlying views”. Modern papers would also explain consistency training in terms of mutual information, an explanation that I like and find intuitive. 
+  
+- key: hadsell_2006
+  authors: Hadsell, R., Chopra, S., & LeCun, Y. 
+  year: 2006
+  title: Dimensionality reduction by learning an invariant mapping
+  description: One of the first uses of the modern NCE loss. Consistency training with simple siamese network for the purposes of clustering and dimensionality reduction.
+  notes: >
+    Nice use of a spring model to describe the push and pull of the contrastive loss, as well as the motivation for avoiding collapse. 
+    Uses horizontal translation for the views in MNIST, also uses a planes dataset, unsure what augmentations used. 
+    "The experiments presented here demonstrate that, unless prior knowledge is  used to  create  invariance,  variability such as lighting and registration can dominate and distort the outcome of dimensionality reduction." A good statement, true for all of ML not just dimensionality reduction.
+
+- key: chapelle_2005
+  authors: Chapelle, O., & Zien, A. 
+  year: 2005
+  title: Semi-Supervised Classification by Low Density Separation
+  description: The first to formalize the cluster assumption.
+    "The goal of semi-supervised classification is to use un-labeled data to improve the generalization.The cluster assumption states that the decision boundary should not cross high density regions,but instead lie in low density regions.We believe that virtually all successful semi-supervised algorithms utilize the clusteras-sumption,though most of the time indirectly."
+  notes: >
+    "Consider for instance an example where the cluster assumption does not hold:a uniform distribution of input points. Then The unlabeled points convey almost no information, andmaxi-mizingthe marginon thosepoints is useless(and can even be harmful)"
+    But does this ever happen? As pointed out in VAT, we live in the natural world governed by largely continuous physical laws. Do we see uniform distributions in nature other than random noise? 
+
+- key: entmin
+  authors: Grandvalet, Y., & Bengio, Y. 
+  year: 2004
+  title: Semi-supervised Learning by Entropy Minimization
+  description: The original work on entropy minimization, entmin, which is used often in many subsequent semi-supervised learning papers. Also later called “sharpening”.
+    "Our  proposal  encompasses  self-learning  as  a  particular  case,  as  minimizing  entropy  in-creases the confidence of the classifier output. It also approaches the solution of transduc-tive large margin classifiers in another limiting case, as minimizing entropy is a means to drive the decision boundary from learning examples"
+
+- key: salazar_2018
+  authors: Salazar, J., Liang, D., Huang, Z., & Lipton, Z. C. 
+  year: 2018
+  title: Invariant representation learning for robust deep networks
+  description: Amazon invents consistency training. Semi-supervised. Novel in that they enforce consistency on latents in the same way as unsupervised methods.
+
+- key: liang_2018
+  authors: Liang, D., Huang, Z., & Lipton, Z. C. 
+  year: 2018
+  title: LEARNING NOISE-INVARIANT REPRESENTATIONS FOR ROBUST SPEECH RECOGNITION
+  description: Same as other Amazon work, “Invariant Representation Learning”. Semi-supervised consistency training applied to speech recognition, consistency enforced on latents rather than output activations.
+
+- key: uesato_
+  authors: Uesato, J., Alayrac, J.-B., Huang, P.-S., Stanforth, R., Fawzi, A., & Deepmind, P. K.
+  year: 999
+  title: Are Labels Required for Improving Adversarial Robustness?
+  description: Consistency training applied to the challenge of adversarial examples.
+    “Our main insight is that unlabeled data can be a competitive alternative to labeled data for training adversarially robust models”
+    "Intuitively, this is based on two related observations. First, adversarial robustness depends on the smoothness of the classifier around natural images, which can be estimated from unlabeled data. Second, only a relatively small amount of labeled data is needed for standard generalization. Thus, if adversarial training is robust to label noise, labels from supervised examples can be propagated to unsupervised examples to train a smoothed classifier with improved adversarial robustness"
+
+
+- key: dai_
+  authors: Dai, Z., Yang, Z., Yang, F., Cohen, W. W., & Salakhutdinov, R.
+  year: 999
+  title: Good Semi-supervised Learning That Requires a Bad GAN
+  description: Shows that the work dealing with adversarial examples is doing consistency training
+    "We show that given the discriminator objective, good semi-supervised learning indeed requires a bad generator… It seems that good semi-supervised learning and a good generator cannot be obtained at the same time"
+    A GAN can fill out the data space using generated examples, similar to how data augmentation fills out the space. If the generated images are perfect, however, they can’t push out the decision boundary any further than it already was. A bad generator acts in a similar way to data aug or dropout, creating a messier “shotgun” around the existing labeled data points.
+
+
+- key: ye_
+  authors: Ye, M., Zhang, X., Yuen, P. C., Chang, S.-F., Kong, H., & University, B. 
+  year: 999
+  title: Unsupervised Embedding Learning via Invariant and Spreading Instance Features
+  description: Hong Kong baptists invent consistency training.
+
+- key: hu_2017
+  authors: Hu, W., Miyato, T., Tokui, S., Matsumoto, E., & Sugiyama, M. 
+  year: 2017
+  title: Learning Discrete Representations via Information Maximizing Self-Augmented Training
+  description: Japanese university invents consistency training.
+
+- key: psuedolabel
+  authors: Lee, D.-H. 
+  year: 2013
+  title: "Pseudo-Label: The Simple and Efficient Semi-Supervised Learning Method for Deep Neural Networks"
+  description: Early modern work on pseudo-labelling, i.e. semi-supervised consistency training with hard labels.
+  notes: >
+    "For unlabeled data, Pseudo-Labels, just picking up the class which has the maximum predicted probability, are used as if they were true la-bels.  This is in effect equivalent to Entropy Regularization.  It favors a low-density sepa-ration between classes, a commonly assumed prior for semi-supervised learning"
+
+- key: bromley_1994
+  authors: Bromley, J., Guyon, I., Lecun, Y., Sickinger, E., Shah, R., Bell, A., & Holmdel, L. 
+  year: 1994
+  title: Signature Verification using a “Siamese” Time Delay Neural Network
+  description: One of the original works on consistency training. Introduces the siamese network.
+    "During training the two sub-networks extract features from two signatures, while the joining neuron measures the distance be-tween the two feature vectors." Compares two features against each other and if similar enough, they're legit. If above a threshold then call them forgeries. Is doing contrastive learning in what would become essentially NCE
+  notes: >
+    Small data of a few hundred signatures. “In total, 219 people signed between 10 and 20 signatures each, 145 signed genuines, 74 signed forgeries.” 
+
+- key: noisy_student
+  authors: Xie, Q., Luong, M.-T., Hovy, E., & Le, Q. V. 
+  year: 999
+  title: Self-training with Noisy Student improves ImageNet classification
+  description: Mean Teacher on steroids. SOTA on imagenet for a few years. Starts with a totally pretrained teacher model compared to vanilla mean teacher which trains both in tandem. Instead of an EMA teacher, periodically replaces the teacher with the student. Only does augs on the student’s data.
+  notes: >
+    "Noisy Student Training extends the idea of self-training and distillation with the use of equal-or-larger student mod-els and noise added to the student during learning. On Im-ageNet, we first train an EfficientNet model on labeled im-ages and use it as a teacher to generate pseudo labels for300M unlabeled images.  We then train a larger Efficient-Net as a student model on the combination of labeled andpseudo labeled images.  We iterate this process by putting back the student as the teacher.  During the learning of the student, we inject noise such as dropout, stochastic depth,and data augmentation via RandAugment to the student so that the student generalizes better than the teacher"
+    Also does confidence thresholding. No need for scheduling in the consistency training when starting with a fully-trained teacher.
+
+- key: mensink_
+  authors: Mensink, T., Uijlings, J., Kuznetsova, A., Gygli, M., & Ferrari, V.
+  year: 999
+  title: Factors of Influence for Transfer Learning across Diverse Appearance Domains and Task Types
+  description: Shows that the best choice of supervised pretraining task depends on your target dataset. There is often a better choice than imagenet. Source should include target.
+  notes: >
+    "At  a  high  level,  our  main  conclusions  are  (1)  for  most target  tasks  we  are  able  to  find  sources  that  significantly outperform Imagenet pre-training;  (2)  the  image  domain is the most important factor for achieving positive transfer;(3)  the  source  dataset  should include the  image  domain  of the target dataset to achieve best results; (4) conversely, we observe almost no negative effects when the image domain of the source task is much broader than that of the target; (5)transfer across task types can be beneficial, but its success is heavily dependent on both the source and target task types"
+    Also makes the point that general is better than bespoke when it comes to few shot learning or domain-adaptation
+    "Overall,the community seems to be reaching a consensus: the key ingredient to high-performing few-shot classification is learning a general representation,rather than sophisticated algorithms for adapting to the new class"
+
+- key: kotar_
+  authors: Kotar, K., Ilharco, G., Schmidt, L., Ehsani, K., & Mottaghi, R. 
+  year: 999
+  title: Contrasting Contrastive Self-Supervised Representation Learning Models
+  description: Compares a few recent contrastive approaches across task types and datasets.
+    Shows that performance on structural global img tasks even have neg corr with performance on imagement. This makes sense bc of the invariances being imparted by the standard set of data augs. 
+  notes: >
+    Compares Swav, MOCO and PIRL, which are all essentially doing the same thing, they all do a similar set of data augs, though PIRL does jigsaw as well, but that’s just crop++. Would like to see how different sets of invariances perform on different tasks. For example, how would SSL perform on object detection or semantic segmentation if we remove the cropping, which is destroying sensitivity to global structure? What if we replace it with something like from Beyond Invariance?
+
+- key: clip
+  authors: Radford, A., Kim, J. W., Hallacy, C., Ramesh, A., Goh, G., Agarwal, S., Sastry, G., Askell, A., Mishkin, P., Clark, J., Krueger, G., & Sutskever, I. 
+  year: 999
+  title: Learning Transferable Visual Models From Natural Language Supervision
+  description: CLIP from OpenAI. Standard consistency training using the NCE loss in a cross-modal setting, text and images. Trained on a large dataset of internet images and their corresponding captions. NCE objective gives ability for cross modal lookup, allowing a zero-shot classifier similar to the earlier work on siamese networks for face and signature verification. CLIP is a scaled up version of Con-VIRT (Zhang et al., 2020),
+  notes: > 
+    More support for general approaches over bespoke: "Flagship systems like GPT-3 are now competitive across many tasks with bespoke models while requiring little to no dataset specific training data"
+    Balances the dataset. Not just a randomly gathered bunch of images and text.
+    Generative works but is too costly: "Other work has found that although generative models of images can learn high quality image representa-tions, they require over an order of magnitude more computethan contrastive models with the same performance (Chen et al., 2020a)"
+    Trained from scratch, uses vision transformer though also tested resnet.
+    We’re still a long way from pretrained features outperforming fine-tuning on specific tasks, though the pretrained features are more general: "Although adaptingCLIP to the ImageNet distribution increases its ImageNetaccuracy by 9.2% to 85.4% overall, and ties the accuracyof the 2018 SOTA from Mahajan et al. (2018),average accuracy under distribution shift slightly decreases."
+    "This suggests CLIP does little to address the underlyingproblem of brittle generalization of deep learning models.Instead CLIP tries to circumvent the problem and hopes thatby training on such a large and varied dataset that all datawill be effectively in-distribution. This is a naive assumptionthat, as MNIST demonstrates, is easy to violate"
+
+- key: s4l
+  authors: Zhai, X., Oliver, A., Kolesnikov, A., & Beyer, L.
+  year: 999
+  title: "S4L: Self-Supervised Semi-Supervised Learning"
+  description: Just does pretext tasks rotation and exemplar in semi-supervised setting rather than unsupervised pretraining followed by fine-tuning. Not really relevant anymore now that we’ve seen that consistency training outperforms pretext tasks.
+
+- key: information_bottleneck
+  authors: Tishby, N., & Zaslavsky, N.
+  title: Deep Learning and the Information Bottleneck Principle
+  description: "Interesting framing of deep learning from a mutual information perspective: in supervised learning the neural network is trying to compress X down to only that required to predict y. Nothing more. Nothing less.
+    Claims that training undergoes two phases: compression and prediction. Emphasizes that compression is only relevant with respect to an output task. Learning does not happen in a vacuum.
+    The mutual information perspective is the same as Hinton in the original work on consistency training, except they’re talking about the supervised setting of X and y, rather than the mutual information between augmented views of the same X. "
+
+- key: directpred
+  authors: Tian, Y., Chen, X., & Ganguli, S. 
+  year: 2021
+  title: Understanding self-supervised Learning Dynamics without Contrastive Pairs
+  description: Confirms SimSiam that stopgrad + pred head is all you need for stability. Proposes a method, DirectPred, that uses a non-learned something in place of the pred head, but I don’t understand what they mean. 
+    "The existence ofthe predictor and stop-gradient is absolutely essential.  Re-moving either of them leads to representational collapse inBYOL and SimSiam.EMA. While the original BYOL needs EMA to work, theylater confirmed that EMA is not necessary (i.e., the onlineand target networks can be identical) if a higherαpis used.This is also confirmed with SimSiam, as long as the pre-dictor is updated more often or has larger learning rate (orlargerαp). However, the performance is slightly lower."
+
+- key: byol2
+  authors: Richemond, P. H., Grill, J.-B., Altché, F., Tallec, C., Strub, F., Brock, A., Smith, S., De, S., Pascanu, R., Piot, B., & Valko, M. 
+  year: 2020
+  title: BYOL works even without batch statistics
+  description: Responding to Untitled AI's blog post. Shows that BN isn't what makes byol work, though good norming is essential. They replace batch norm with non-batch-dependent norming for only a small hit in performance. I’m persuaded that BN is not what’s preventing collapse here, though it is acting as a dispersal term.
+  
+- key: byol
+  authors: Grill, J.-B., Strub, F., Altché, F., Tallec, C., Richemond, P. H., Buchatskaya, E., Doersch, C., Pires, B. A., Guo, Z. D., Azar, M. G., Piot, B., Kavukcuoglu, K., Munos, R., & Valko, M. 
+  year: 999
+  title: "Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning"
+  description: Mean Teacher but in the semi-supervised setting and with a pred head, which is just an extra MLP on the student network to add asymmetry. Calls the siamese twins “online” and “target” rather than “student” and “teacher”. Not really "new" like the title says
+  notes: >
+    Hypothesizes that the role of teacher is to be optimal, similar to arguments made in Mean Teacher family. 
+    Initially claimed that the EMA was critical: "Using a target network in the loss has two effects: stopping the gradient through the prediction targets and stabilizingthe targets with averaging. Stopping the gradient through the target change the objective while averaging makesthe target stable and stale… This shows that making the prediction targets stable and stale is the main cause of theimprovement rather than the change in the objective due to the stop gradient."
+    But later admitted that EMA is helpful but not needed. Stopgrad and pred head is enough.
+    Weight decay very important
+    Claims that their approach is agnostic to removing the crop from the set of data augmentations. A strange claim essentially saying they’re not able to control the invariances they impart. 
+
+
+- key: whitening
+  authors: Ermolov, A., Siarohin, A., Sangineto, E., & Sebe, N.
+  year: 2021
+  title: Whitening for Self-Supervised Representation Learning
+  description: Consistency training. Gets dispersion uses whitening rather than negatives as in NCE. 
+    "To avoid a representation col-lapse, we do not need to contrast positives against negatives in the contrastive loss or in the triplet loss because the optimization process leads to shrinking the distance between positive pairs and, indirectly, scatters the other samples to satisfy the overall spherical-distribution constraint" 
+  notes: >
+    Batch norm in isolation was not enough, they had to also do the decorrelation.
+
+- key: simsiam
+  authors: Chen, X., & He, K. 
+  year: 999
+  title: Exploring Simple Siamese Representation Learning
+  description: SimSiam. 'All you need is stopgrad + pred head.' Vanilla consistency training. No EMA like mean teacher, just two symmetrical models like in horseshoe or transformation/stability. Applied in the unsupervised setting. Just does MSE on the features.
+  notes: >
+    Uncertain the importance of the pred head here. It's critical but i don't understand why
+    BN also critical for performance. Doesn't collapse without but performance is very bad. They also see that using BN doesn't prevent collapse, stopgrad is needed for that.
+    Does loss in both directions. First stop grad in one direction, then the other. Difference in doing this rather than just one way is 68% vs 65%, a nontrivial amount considering how easy it is to do.
+
+- key: nat
+  authors: Bojanowski, P., & Joulin, A. 
+  year: 999
+  title: Unsupervised Learning by Predicting Noise
+  description: Noise as Targets (NAT). Enforces consistency training against random fixed targets. If as many targets as images in dataset, that’s Exemplar. If fewer, that’s the clustering approaches like swav.
+
+- key: barlow
+  authors: Zbontar, J., Jing, L., Misra, I., Lecun, Y., & Deny, S.
+  year: 2021
+  title: "Barlow Twins: Self-Supervised Learning via Redundancy Reduction"
+  description: Batch level consistency training like NCE family but gets dispersion by trying to set the cross-correlation matrix of two views to the identity matrix, i.e. make each pair of positive views perfectly correlated to each other and not correlated to the other images in the batch.
+  notes: >
+    "BothBARLOWTWINS’ andINFONCE’s objective functionshave two terms, the first aiming at making the representa-tions invariant to the distortions fed to the twin networks,the second aiming at maximizing the variability of the repre-sentation learned. Another common point between the twolosses is that they both rely on batch statistics to measurethis variability.  However, theINFONCEobjective maxi-mizes the variability of the representation by maximizingthe pairwise distance between all pairs of samples, whereasour method does so by decorrelating the components of therepresentation vectors"
+
+    Don’t need to break symmetry with a pred head like in SimSiam, DirectPred or BYOL. 
+    "nINFONCE, the representations are typically normal-ized along the feature dimension to compute a cosine similarity between embedded samples. We normalize the representations along the batch dimension instead."
+    Observes a steady increase in performance as they increase the size of latent features, in contrast to the NCE family methods. 
+    “n a concurrent work, (Ermolov et al., 2020)proposeW-MSE. Acting on the representations of identi-cal twin networks, this method performs a differentiablewhitening operation (via Cholesky decomposition) of eachbatch of representations before computing a simple cosinesimilarity between the whitened representations of the twinnetworks. In contrast, the redundancy reduction term in ourloss encourages the whitening of the batch representationsas a soft constraint”
+
+
+- key: sajjadi
+  authors: Sajjadi, M., Javanmardi, M., & Tasdizen, T. 
+  title: Regularization With Stochastic Transformations and Perturbations for Deep Semi-Supervised Learning.
+  description: “Transformation/Stability (TS)”
+    Representative early modern work in consistency training. Horseshoe model but compares views simultaneously rather than across time. 
+
+- key: knowledge_distillation
+  authors: Hinton, G., & Dean, J. 
+  year: 2015
+  title: Distilling the Knowledge in a Neural Network
+  description: The original work in knowledge distillation. Applied to actual Google infra. 
+
+- key: bachman_
+  authors: Bachman, P., & Alsharif, O. 
+  year: 999
+  title: Learning with Pseudo-Ensembles
+  description: Early modern work in consistency training. Implements different views with different "child networks", which appear to be just dropout. Also does entmin.
+
+- key: cmc
+  authors: Tian, Y., Krishnan, D., Research, G., & Isola, P.
+  year: 999
+  title: Contrastive Multiview Coding
+  description: CMC. Multi-modal contrastive learning using different color channels. 
+    "Given a dataset of RGB images, we convert themto theLabimage color space, and split each image intoLandabchannels, as originally proposed in SplitBrain autoen-coders [85]. During contrastive learning, L and ab from thesame image are treated as the positive pair, and ab channelsfrom other randomly selected images are treated as a neg-ative pair"
+  notes: >
+    Well written, makes interesting connections to neuroscience.
+    "There is significant evidence inthe cognitive science and neuroscience literature that suchview-invariant representations are encoded by the brain”. Iindeed, the recent distill piece showed the sames neurons firing for text prompts, cartoons, and imgs or the same idea. Multimodal neurons.
+    Also invokes the original Hinton mutual information explanation: "The resolution to this apparent dilemma is that we wantto maximize the “good” information – thesignal– in ourrepresentations, while minimizing the “bad” information –thenoise."
+    Does a fair bake-off comparing this consistency training approach to the equivalent predictive approach but doing the coloration task itself, i.e. predict the other color channel. COnsistency training wins. 
+
+- key: exemplar
+  authors: Dosovitskiy, A., Fischer, P., Springenberg, T., Riedmiller, M., & Brox, T.
+  year: 999
+  title: Discriminative Unsupervised Feature Learning with Exemplar Convolutional Neural Networks
+  description: Exemplar. Early modern work that parented the following work in instance discrimination. Contrastive consistency training using a monster softmax, one output for each seed image in the dataset. 
+  notes: >
+    uses clustering to make sure the comprisons are sampled from different types of imgs rather than lots of similar imgs, which hurt performance.
+    "rotation andscaling have only a minor impact on the performance, whiletranslations, color variations and contrast variations aresignificantly more important." also blur was important
+    also shows how aug reduces dist btwn augged versions of same image, which is the explicit goal of invariance
+
+- key: moco
+  authors: He, K., Fan, H., Wu, Y., Xie, S., & Girshick, R.
+  year: 999
+  title: Momentum Contrast for Unsupervised Visual Representation Learning
+  description: MoCo. Just adds a queue and mean teacher style “momentum encoder” to He (_). Essentially NCE with mean teacher. Queue is to get around large batch sizes without doing a monster softmax like Exemplar.
+
+- key: pirl
+  authors: Misra, I., & Van Der Maaten, L.
+  title: Self-Supervised Learning of Pretext-Invariant Representations
+  description: PIRL. Consistency training with NCE objective where different views are different jigsaw permutations. 
+    Motivation was to demonstrate the superiority of consistency training vs pretext tasks in a fair bake off, hence the jigsaw data aug. Consistency training wins. 
+    "Such losses encourage networkφθ(·)to learn image representations that contain information ontransformationt, thereby encouraging it to maintain infor-mation that is not semantically relevant"
+  notes: >
+    shows distance btwn the augmetned versions. The invariant ones are indeed much closer than the normal jigsaw ones.
+    they also tested w rotation pretext task, saw similar improvement
+    "This loss encourages the representation of imageIto besimilar to that of its transformed counterpartIt, whilst alsoencouraging the representation ofItto be dissimilar to thatof other imagesI′"
+    uses Moco style memory bank to get enough negative samples
+    introduces a useful concept: invariance vs covariance
+
+
+- key: mixmatch
+  authors: Berthelot, D., Research, G., Carlini, N., Goodfellow, I., Oliver, A., Papernot, N., & Raffel, C. 
+  title: "MixMatch: A Holistic Approach to Semi-Supervised Learning"
+  description: Consistency training for semi-supervised learning. Uses symmetrical siamese network. Also adds in entmin. Novel in that it uses Mixup in addition to standard data aug to get views.
+
+- key: uda
+  authors: Xie, Q., Dai, Z., Hovy, E., Luong, M.-T., & Le, Q. V. 
+  year: 999
+  title: Unsupervised Data Augmentation for Consistency Training
+  description: Consistency training for semi-supervised learning using symmetrical siamese network. 
+    Not actually novel but excellent representative work, well written with great conceptual overview of how consistency training works. One of the best in the genre. 
+    Claims that their novelty is how they do data augmentation, but they do the standard set of augmentations. Randaug TODO. "But different from existing work, we focus on the unattended question of how the form or “quality” of the noising operation can influence the performance of this consistency training framework"
+  notes: >
+    "By minimizing the consistency loss, UDA allows for label information to propagate smoothly from labeled examples to unlabeled ones. Intuitively, one can think of UDA as an implicit iterative process. First, the model relies on a small amount of labeled examples to make correct predictions for some unlabeled examples, from which the label information is propagated to augmented counterparts through the consistency loss. Over time, more and more unlabeled examples will be predicted correctly which reflects the improved generalization of the model. Various other types of noise have been tested for consistency training (e.g., Gaussian noise, adversarial noise, and others), yet we found that data augmentation outperforms all of them in many settings, leading to state-of-the-art performance
+    From the accompanying blog post at: https://ai.googleblog.com/2019/07/advancing-semi-supervised-learning-with.html
+    "there is indeed a strong correlation betweenthe performance of data augmentation operations in supervised learning and their performance inconsistency training."
+    Begins to touch on what we want with "Targeted inductive biases: Different tasks require different inductive biases. Data augmentation operations that work well in supervised training essentially provides the missing inductive biases." but doesn't take it far enough.
+    backtranslation for nlp. Similar to cycle loss for img translation. Is this use the same as cyclic in the da work?
+    confidence masking. only computes consistency where conf reaches threshold.
+    sharpens preds via entropy minimization
+    outperforms vat bc noise is natural
+    like dirt-t 
+    "To tackle this difficulty, weintroduce a new training technique, called Training Signal Annealing (TSA), which gradually releasesthe “training signals” of the labeled examples as training progresse
+    Does this by only training on the harder examples, ignores easy ones.
+    ",  the performance difference between UDA and VAT shows the superiority of dataaugmentation based noise. The difference of UDA and VAT is essentially the noise process. Whilethe noise produced by VAT often contain high-frequency artifacts that do not exist in real images,data augmentation mostly generates diverse and realistic images"
+    "Existing works in consistency training does make use of data augmentation [32,51]; however, theyonly apply weak augmentation methods such as random translations and cropping.  In parallel toour work, ICT [60] and MixMatch [3] also show improvements for semi-supervised learning. Thesemethods employ mixup [70] on top of simple augmentations such as flipping and cropping; instead,UDA emphasizes on the use of state-of-the-art data augmentations, leading to significantly betterresults on CIFAR-10 and SVHN. In addition, UDA is also applicable to language domain and canalso scale well to more challenging vision datasets, such as ImageNet.Other works in the consistency training family mostly differ in how the noise is defined: Pseudo-ensemble [2] directly applies Gaussian noise and Dropout noise; VAT [41,40] defines the noiseby approximating the direction of change in the input space that the model is most sensitive to;Cross-view training [7] masks out part of the input data. Apart from enforcing consistency on theinput examples and the hidden representations, another line of research enforces consistency on themodel parameter space. Works in this category include Mean Teacher [58], fast-Stochastic WeightAveraging [1] and Smooth Neighbors on Teacher Graphs [35].  For a complete version of related work, please refer to Appendix D"
+
+
+- key: deepcluster
+  authors: Caron, M., Bojanowski, P., Joulin, A., & Douze, M. 
+  year: 999
+  title: Deep Clustering for Unsupervised Learning of Visual Features
+  description: Deepcluster. Consistency training using clustering.
+  notes: >
+    Deepcluster. Alternates btwn clustering then training on the cluster assignments.
+    also focuses on eval, diff datasets and diff downstream tasks. Good.
+    Interesting fact "However the performance of such random features onstandard transfer tasks, is far above the chance level. For example, a multilayerperceptron classifier on top of the last convolutional layer of a random AlexNetachieves  12%  in  accuracy  on  ImageNet  while  the  chance  is  at  0.1%"
+    "Thegood performance of random convnets is intimately tied to their convolutionalstructure which gives a strong prior on the input signal. The idea of this work isto exploit this weak signal to bootstrap the discriminative power of a convnet.We cluster the output of the convnet and use the subsequent cluster assignmentsas “pseudo-labels”"
+    Interesting data preprocessing step:
+    "Unsupervisedmethods often do not work directly on color and different strategies have beenconsidered as alternatives  [25,26]. We apply a fixed linear transformation basedon Sobel filters to remove color and increase local contrast [19,39]"
+    also does consistency regularization by data aug. Would it work without that? is that the key mechanism of action? In this case this is the same as consistency regularization. Would this have worked at all without that data aug?
+    helpful to have more k than img classes, which makes sense bc each class is composed of multiple types of thing.
+    has a large section on viz, like distill crew.
+    also tests semseg and obj detection. Good to see downstream tasks varied a bit. Clf det and semseg.
+    More support for fine tuning as good baseline.
+    i believe also shows imagenet pretraining w labels to be better than all the unsup methods by a bit, is that true? is that why later results point out when they do better than imagenet pretrained?
+    more support for bigger nns. Bigger gives significant boosts to target task.
+
+
+- key: simclr
+  authors: Chen, T., Kornblith, S., Norouzi, M., & Hinton, G. 
+  year: 2020
+  title: A Simple Framework for Contrastive Learning of Visual Representations
+  description: SimCLR. Canonical work in NCE consistency training for SSL. Symmetrical siamese model.
+  notes: >
+    nicely emphasizes importance of data aug.
+    notes importance of big models.
+    "when training supervised mod-els with the same set of augmentations, we observe thatstronger color augmentation does not improve or even hurtstheir performance. Thus, our experiments show that unsu-pervised contrastive learning benefits from stronger (color)data augmentation than supervised learning"
+    why would that be? that doesn't mesh with our understanding of how consistency training works
+    "We conjecture that the importance of using the representa-tion before the nonlinear projection is due to loss of informa-tion induced by the contrastive loss"
+    "methods using label propogation" includes UDA, FixMatch and S4L. Methods using self-sup rep learning only is simclr and cpc. What do the mean by this? They mean those are semi sup.
+    "The idea of making representations of an image agree witheach other under small transformations dates back to Becker& Hinton (1992).  We extend it by leveraging recent ad-vances in data augmentation, network architecture and con-trastive loss. A similar consistency idea, but forclass labelprediction, has been explored in other contexts such as semi-supervised learning (Xie et al., 2019; Berthelot et al., 2019)"
+
+
+- key: swav
+  authors: Caron, M., Misra, I., Mairal, J., Goyal, P., Bojanowski, P., & Joulin, A. 
+  year: 999
+  title: Unsupervised Learning of Visual Features by Contrasting Cluster Assignments
+  description: SwAV, parent of SEER, child of Deepcluster.
+    Deepcluster but compares simultaneously within batch rather than across epoch.
+  notes: >
+    "Indeed, the prototypes in SwAV are notstrongly encouraged to be categorical and random fixed prototypes work almost as well. Rather, theyhelp contrasting different image views without relying on pairwise comparison with many negativessamples."
+    "As a matter of fact, DeepCluster-v2 can be interpreted as a special case of our proposed swappingmechanism: swapping is done across epochs rather than within a batch. Given a crop of an imageDeepCluster-v2 predicts the assignment of another crop, which was obtained at the previous epoch.SwAV swaps assignments directly at the batch level and can thus work online."
+    says same thing we were saying: the data aug is critical, it's doing consistency training like the other methods.
+
+- key: seer
+  authors: Goyal, P., Caron, M., Lefaudeux, B., Xu, M., Wang, P., Pai, V., Singh, M., Liptchinsky, V., Misra, I., Joulin, A., & Bojanowski, P. 
+  year: 2021
+  title: Self-supervised Pretraining of Visual Features in the Wild
+  description: SEER from Facebook. Swav but on bigger, non-curated data. Regnet rather than resnet. 
+
+- key: laine_aila
+  authors: Laine, S., & Aila, T.
+  year: 999
+  title: TEMPORAL ENSEMBLING FOR SEMI-SUPERVISED LEARNING
+  description: Canonical work in early modern consistency training for semi-supervised learning. The horseshoe model is the classic symmetrical siamese setup while the EMA model is precursor to Mean Teacher.
+  notes: >
+    "We introduce self-ensembling, where we form a consensus predictionof the unknown labels using the outputs of the network-in-training on differentepochs, and most importantly, under different regularization and input augmenta-tion conditions. This ensemble prediction can be expected to be a better predictorfor the unknown labels than the output of the network at the most recent trainingepoch, and can thus be used as a target for training."
+    "The first one,Π-model, en-courages consistent network output between two realizations of the same input stimulus, under twodifferent dropout conditions. The second method, temporal ensembling, simplifies and extends thisby taking into account the network predictions over multiple previous training epochs."
+    Schedules in consistency training only after training on task for awhile.
+    "In the beginning the total loss and the learning gradients are thusdominated by the supervised loss component, i.e., the labeled data only.  We have found it to bevery important that the ramp-up of the unsupervised loss component is slow enough—otherwise,the network gets easily stuck in a degenerate solution where no meaningful classification of the datais obtained."
+    restricting the data available for consistency training to only the same data as for testing didn't help. We can use sim data or data from different domain in the consistency training. Hints at applications in DA, and indeed Mean Teacher was used in DA by French.
+    "This indicates that in order to train a better classifier by addingextra data as unlabeled inputs, it is enough to have the extra data roughly in the same space as theactual inputs—in our case,  natural images.   We hypothesize that it may even be possible to useproperly crafted synthetic data as unlabeled inputs to obtain improved classifiers."
+
+- key: mean_teacher
+  authors: Tarvainen, A., & Valpola, H.
+  year: 999
+  title: "Mean teachers are better role models: Weight-averaged consistency targets improve semi-supervised deep learning results."
+  description: Refines Laine and Aila’s EMA into Mean Teacher, the canonical example from the asymmetrical EMA siamese family. Consistency training from semi-supervised learning. Uses dropout and basic data aug.
+  notes: >
+    "Dropout on the teacher side provides only a marginal benefitover just having it on the student side" 
+    If this was a techer studuent setup why would dropout not HARM when it's on the teacher?? 
+    "However, because the targets change only onceper epoch, Temporal Ensembling becomes unwieldy when learning large datasets.To overcome this problem, we propose Mean Teacher, a method that averagesmodel weights instead of label predictions."
+    same motivation deepcluster -> swav, logistical
+    also tried w KLD but not as good. Why i wonder? see appendix
+    VAT is similiar to horseshoe model but uses adv perturb rather than independent noise
+    "The idea of a teacher model training a student is related to model compression [3] and distillation [9]" 
+    "The difference between distillationand consistency regularization is that distillation is performed after training whereas consistencyregularization is performed on training time" 
+    plays with consistency at different parts, tries adding another head, which essentially does the same as the projection head more recent folks are doing, ie separating the cons training from the downstream task.
+
+- key: saito_2017
+  authors: Saito, K., Ushiku, Y., Harada, T., & Saenko, K. 
+  year: 2017
+  title: Adversarial Dropout Regularization
+  description: Uses dropout for consistency training. Instead of statistical metric like NCE it learns the distance adversarial.
+
+- key: vat
+  authors: Miyato, T., Maeda, S., Koyama, M., & Ishii, S. 
+  year: 2017
+  title: "Virtual Adversarial Training: A Regularization Method for Supervised and Semi-Supervised Learning."
+  description: Consistency training but learns the perturbations. Like Goodfellow (2015)’s adversarial training but enforces consistency with the unaugmented view rather than class label. 
+  notes: >
+    The motivation here is that, like in adversarial examples, smoothing a given input point evenly in all directions may still leave it open to adversarial attacks for a specific direction, it may need to be smoothed a lot more in some directions than others. “If the distribution around a given input is  anisotropic  and  the  goal  is  to  resolve  this  anisotropy,it  does  not  make  much  sense  to  exert  equal  smoothing“pressure” into all directions”
+    Well written with a lot of interesting points, though outperformed by standard aug in UDA, and outsourcing the supervision we get from consistency training seems to largely defeat the purpose. Adversary can instill invariances that you don’t want.
+
+- key: french
+  authors: French, G., & Fisher, M. 
+  year: 2018
+  title: Self-ensembling for visual domain adaptation
+  description: Consistency training. Mean Teacher applied to domain adaptation. Suggests that the best domain-adaptation methods will probably be consistency based. Only does explicit “domain adaptation” by using adabn, everything else is just Mean Teacher from semi-supervised learning.
+
+- key: cpc2
+  authors: Hénaff, O. J., Srinivas, A., De Fauw, J., Razavi, A., Doersch, C., Eslami, S. M. A., & Van Den Oord, A. 
+  year: 2020
+  title: Data-Efficient Image Recognition with Contrastive Predictive Coding
+  description: CPC gets upgrades. 
+
+- key: cpc
+  authors: van den Oord DeepMind, A., Li DeepMind, Y., & Vinyals DeepMind, O.
+  year: 999
+  title: Representation Learning with Contrastive Predictive Coding
+  description: CPC. Consisteny training for SSL. Uses complex gridification for crops. 
+
+- key: wu_
+  authors: Wu, Z., Xiong, Y., Yu, S. X., & Lin, D. 
+  year: 999
+  title: "Unsupervised Feature Learning via Non-Parametric Instance Discrimination"
+  description: Adds a queue to get around Exemplar's softmax. Uses NCE loss. 
+
+- key: robot_brains_lecun
+  year: 2021
+  authors: Abbeel, P., LeCun, Y.
+  title: Yann LeCun explains why Facebook would crumble without AI
+  description: The Robot Brains Podcast
+
+- key: untitled_ai
+  year: 2020
+  authors: Fetterman and Albrecht
+  title: "Understanding self-supervised and contrastive learning with 'Bootstrap Your Own Latent' (BYOL"
+  description: Proposes that BYOL relies on BN for hidden dispersal effect

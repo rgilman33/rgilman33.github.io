@@ -1,0 +1,25 @@
+<span class="ref_container"> {% assign ref = site.data.references | where: "key", include.key | first %}
+    <span class="ref_text">
+       {{ include.text }}
+    </span>
+    <span class="ref_content">
+        <span class="ref_title">
+            {{ref.title}} 
+        </span>
+        <span class="ref_year">
+            ({{ ref.year }})
+            <br/>
+        </span>
+        <span class="ref_authors">
+            {{ ref.authors }}
+            <br/>
+        </span>
+        <span>
+            -----------------------
+            <br/>
+        </span>
+        <span class="ref_description">
+            {{ ref.description }}
+        </span>
+    </span>
+</span>
