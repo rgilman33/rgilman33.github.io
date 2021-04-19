@@ -52,7 +52,7 @@ This isn't some niche ML thing, humans also learn best through examples. To teac
 
 <br/>
 
-You’re about to deliver the final model when you get an urgent email from the CEO: now they need a hotdog *brand* detector! Multiclass classifier. Needs to recognize the twelve most popular brands of hotdog by *hotdog alone*--can’t even rely on packaging! That changes things. 
+You’re about to deliver the final model when you get an urgent email from the CEO: now they need a hotdog *brand* detector! Multiclass classifier. Needs to differentiate between the twelve most popular brands of hotdog by *hotdog alone*---can’t even rely on packaging! That changes things. 
 
 The model architecture can mostly stay the same.  What about data augmentation? Does this change the set of perturbations you’re comfortable doing to the dataset? Think about it for a moment.
 
