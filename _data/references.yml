@@ -321,6 +321,7 @@
 
 - key: sajjadi
   authors: Sajjadi, M., Javanmardi, M., & Tasdizen, T. 
+  year: 2016
   title: Regularization With Stochastic Transformations and Perturbations for Deep Semi-Supervised Learning.
   description: “Transformation/Stability (TS)”
     Representative early modern work in consistency training. Horseshoe model but compares views simultaneously rather than across time. 
@@ -392,7 +393,7 @@
   title: Unsupervised Data Augmentation for Consistency Training
   description: Consistency training for semi-supervised learning using symmetrical siamese network. 
     Not actually novel but excellent representative work, well written with great conceptual overview of how consistency training works. One of the best in the genre. 
-    Claims that their novelty is how they do data augmentation, but they do the standard set of augmentations. Randaug TODO. "But different from existing work, we focus on the unattended question of how the form or “quality” of the noising operation can influence the performance of this consistency training framework"
+    Claims that their novelty is how they do data augmentation, but they do the standard set of augmentations. RandAug. "But different from existing work, we focus on the unattended question of how the form or “quality” of the noising operation can influence the performance of this consistency training framework"
   notes: >
     "By minimizing the consistency loss, UDA allows for label information to propagate smoothly from labeled examples to unlabeled ones. Intuitively, one can think of UDA as an implicit iterative process. First, the model relies on a small amount of labeled examples to make correct predictions for some unlabeled examples, from which the label information is propagated to augmented counterparts through the consistency loss. Over time, more and more unlabeled examples will be predicted correctly which reflects the improved generalization of the model. Various other types of noise have been tested for consistency training (e.g., Gaussian noise, adversarial noise, and others), yet we found that data augmentation outperforms all of them in many settings, leading to state-of-the-art performance
     From the accompanying blog post at: https://ai.googleblog.com/2019/07/advancing-semi-supervised-learning-with.html
