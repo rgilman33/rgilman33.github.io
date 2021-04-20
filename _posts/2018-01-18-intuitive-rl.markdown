@@ -12,6 +12,6 @@ Reinforcement learning (RL) practitioners have produced a number of excellent tu
 
 This is a story about the Actor Advantage Critic (A2C) model. Actor-Critic models are a popular form of Policy Gradient model, which is itself a vanilla RL algorithm. If you understand the A2C, you understand deep RL.
 
-Corresponding [code here](https://github.com/rgilman33/simple-A2C-PPO). Download the [high-res comic here](/assets/img/RLComicMerged_med.png).
+Corresponding [code here](https://github.com/rgilman33/simple-A2C-PPO). Download the [high-res comic here](/assets/img/RLComicMerged_med.png). Art by [@embermarke](https://twitter.com/embermarke)
 
 ![A2C comic](/assets/img/a2c.jpeg)

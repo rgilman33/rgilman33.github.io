@@ -89,7 +89,7 @@ Sometimes that means behaving in the same way (i.e. invariance) but sometimes it
 
 How we define self-consistency is dependent on the downstream task we have in mind. The more downstream tasks you try to satisfy with your features, the fewer constraints you can impose. The fewer constraints you have, the more parameters, compute and data you need for a given level of performance on any given task. Supervised learning creates such powerful features with such relatively little data precisely *because* it collapses so much information. A hotdog detector is easier to train than a hotdog brand detector.
 
-Those of us without 512-GPU pods and billion-sized image datasets should probably focus on learning *narrow, task-specific* features rather than universal, holy-grail features that work on every downstream task.{% include note.html content="Yannic Kilchner calls these holy-grail features _Eierlegende Wollmilchsau_ ---a pig that lays eggs, gives milk and produces wool before it's turned into a tasty Sunday roast." %} We should try and put together a set of constraints so strict that they mimic the supervisory signal we would have gotten from task labels. “Unsupervised” doesn’t have to mean “general”, it can be totally bespoke. 
+Those of us without 512-GPU pods and billion-sized image datasets should probably focus on learning *narrow, task-specific* features rather than universal, holy-grail features that work on every downstream task.{% include note.html content="Yannic Kilcher calls these holy-grail features _Eierlegende Wollmilchsau_---which is German for 'a pig that lays eggs, gives milk and produces wool before it's turned into a tasty Sunday roast.'" %} We should try and put together a set of constraints so strict that they mimic the supervisory signal we would have gotten from task labels. “Unsupervised” doesn’t have to mean “general”, it can be totally bespoke. 
 
 ### Learning a lane follower
 
@@ -123,3 +123,6 @@ As a final note, our “differently supervised” model learns the same features
 ![Visualizing activations using integrated gradients](/assets/img/beyond_invariance_IG.gif)
 
 <span class="img_text">Showing what the model "sees" using the integrated-gradients approach. This is the same pattern of activations as a supervised model. The agent isn't perfect---it cuts corners and totally loses the lane at the end.</span>
+
+
+*Previous post: [An engineer's guide to the literature]({% post_url 2021-04-20-consistency-III %})*

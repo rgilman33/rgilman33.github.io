@@ -67,4 +67,8 @@ As you can see below, consistency training separates our clusters even without u
 
 We've chosen the “golidlocks” amount of augmentation for this example---too much data augmentation and both halfmoons would have collapsed into a single blob, too little and nothing will agglomerate at all.
 
+<br/>
+
 *Next post: [An engineer's guide to the literature]({% post_url 2021-04-20-consistency-III %})*
+
+*Previous post: [Intro to consistency training]({% post_url 2021-04-20-consistency-I %})*

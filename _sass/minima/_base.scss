@@ -272,6 +272,8 @@ table {
 .ref_container:hover .ref_content, .note_container:hover .note_content {
   display: inline-block;
   position: absolute;
+  margin-left: -80px;
+  margin-top: 20px;
 }
 
 .ref_container:hover, .note_container:hover  {
@@ -286,9 +288,9 @@ table {
   font-weight: bold;
 }
 
-.ref_text {
+.ref_text, .note_text {
   font-weight: bold;
-  color: rgb(50,50,50);
+  color: darkblue;
 }
 
 .ref_text:hover {
