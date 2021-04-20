@@ -6,7 +6,7 @@ date:   2021-04-20
 categories: consistency-training
 ---
 
-*Corresponding code in [this Colab](https://colab.research.google.com/drive/1e5Xuje96cYlR38zmgzbw8aXm8AhdX58A#scrollTo=0tnFEXzh44mV){:target="_blank"}*
+*Corresponding code in [this Colab](https://colab.research.google.com/drive/1e5Xuje96cYlR38zmgzbw8aXm8AhdX58A?usp=sharing){:target="_blank"}*
 
 In consistency training we’re not mapping from inputs to outputs like in supervised learning. The only thing we're telling the model is to **respond in the same way to different perturbations of the same input image**. We're not telling the model *how* to behave at all, we’re simply telling it to *behave consistently*. 
 
@@ -69,6 +69,6 @@ We've chosen the “golidlocks” amount of augmentation for this example---too 
 
 <br/>
 
-*Next post: [An engineer's guide to the literature]({% post_url 2021-04-20-consistency-III %})*
+*Next post: [Consistency training III: An engineer's guide to the literature]({% post_url 2021-04-20-consistency-III %})*
 
-*Previous post: [Intro to consistency training]({% post_url 2021-04-20-consistency-I %})*
+*Previous post: [Consistency training I: Intro]({% post_url 2021-04-20-consistency-I %})*

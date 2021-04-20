@@ -22,7 +22,7 @@ As we covered in [the intro]({% post_url 2021-04-20-consistency-I %}), consisten
 
 ## Output shaping
 
-Let’s return to our toy dataset from [part II]({% post_url 2021-04-20-consistency-II %}) to show how output shaping and consistency training can solve an even simpler task than the lane-follower above: halfmoons classification. The code for this example is at [this Colab](https://colab.research.google.com/drive/1zrYT4BAhCvEeEAqHD4HS4-H4aSZ73294#scrollTo=GtvrCmLsy9SE){:target="_blank"}.
+Let’s return to our toy dataset from [part II]({% post_url 2021-04-20-consistency-II %}) to show how output shaping and consistency training can solve an even simpler task than the lane-follower above: halfmoons classification. The code for this example is at [this Colab](https://colab.research.google.com/drive/1zrYT4BAhCvEeEAqHD4HS4-H4aSZ73294?usp=sharing){:target="_blank"}.
 
 Like last time, the data team gave a dataset that we know is composed of two classes, bananas and plums. But this time they won’t be able to give us *any* labels. 
 
@@ -125,4 +125,4 @@ As a final note, our “differently supervised” model learns the same features
 <span class="img_text">Showing what the model "sees" using the integrated-gradients approach. This is the same pattern of activations as a supervised model. The agent isn't perfect---it cuts corners and totally loses the lane at the end.</span>
 
 
-*Previous post: [An engineer's guide to the literature]({% post_url 2021-04-20-consistency-III %})*
+*Previous post: [Consistency training III: An engineer's guide to the literature]({% post_url 2021-04-20-consistency-III %})*
