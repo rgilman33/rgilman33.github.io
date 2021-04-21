@@ -57,7 +57,7 @@ Oscar Meyer didn’t make you head of data science for nothing! You quickly real
 
 Let’s appreciate what you just did. You combined your human priors about the natural world with your domain expertise in hotdogs, then you refined that knowledge for the *specific task* and injected it into the algorithm in the form of thoughtfully-crafted data augmentation. **Data augmentation is a form of supervision.**
 
-**But that form of supervision has *nothing to do with labels*. The fact that you as domain-expert are able to say that brand identification is invariant to a particular set of perturbation is an item of knowledge that applies to *all of your records*. This "learning by example", mutual-information channel of supervision will benefit even from an increase in *unlabeled samples*.**
+**But that form of supervision has *nothing to do with labels*. The fact that you as domain-expert are able to say that brand identification is invariant to a particular set of perturbation is an item of knowledge that applies to *all of your records*. This channel of supervision will benefit even from an increase in *unlabeled samples*.**
 
 And you have a ton of those. Oscar Meyer has terabytes of unlabeled hotdog footage just sitting in the basement! Surely there’s a wealth of structure just waiting to be uncovered! You can use the intuition you had above about class consistency across views---*even when you don’t know the class*.
 
