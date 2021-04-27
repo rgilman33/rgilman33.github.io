@@ -21,7 +21,7 @@ The folks in semi-supervised learning call it “consistency training”. This i
 
 ### What is consistency training? 
 
-You’re the technical lead of the Oscar Meyer data science team. The CEO comes to your office with an urgent assignment: they need a model that recognizes hotdogs in natural images. Binary classifier, hotdog or not-hotdog. 
+You’re the technical lead of the Oscar Mayer data science team. The CEO comes to your office with an urgent assignment: they need a model that recognizes hotdogs in natural images. Binary classifier, hotdog or not-hotdog. 
 
 Your team’s first classifier performs well but it isn’t perfect. It’s overfitting to the small dataset. You decide to implement data augmentation. 
 
@@ -53,13 +53,13 @@ You’re about to deliver the final model when you get an urgent email from the 
 
 The model architecture can mostly stay the same.  What about data augmentation? Does this change the set of perturbations you’re comfortable doing? Think about it for a moment.
 
-Oscar Meyer didn’t make you head of data science for nothing! You quickly realize that you’ll have to be much more conservative with the data perturbations. You can’t willy-nilly collapse all the intra-hotdog variability like you did before. Those subtle differences in color, shape and texture are exactly what will help the model distinguish between brands. They weren’t important when your job was just to identify the presence of a hotdog, but now they’re critical differentiators---even though the data itself is the same.
+Oscar Mayer didn’t make you head of data science for nothing! You quickly realize that you’ll have to be much more conservative with the data perturbations. You can’t willy-nilly collapse all the intra-hotdog variability like you did before. Those subtle differences in color, shape and texture are exactly what will help the model distinguish between brands. They weren’t important when your job was just to identify the presence of a hotdog, but now they’re critical differentiators---even though the data itself is the same.
 
 Let’s appreciate what you just did. You combined your human priors about the natural world with your domain expertise in hotdogs, then you refined that knowledge for the *specific task* and injected it into the algorithm in the form of thoughtfully-crafted data augmentation. **Data augmentation is a form of supervision.**
 
 **But that form of supervision has *nothing to do with labels*. The fact that you as domain-expert are able to say that brand identification is invariant to a particular set of perturbation is an item of knowledge that applies to *all of your records*. This channel of supervision will benefit even from an increase in *unlabeled samples*.**
 
-And you have a ton of those. Oscar Meyer has terabytes of unlabeled hotdog footage just sitting in the basement! Surely there’s a wealth of structure just waiting to be uncovered! You can use the intuition you had above about class consistency across views---*even when you don’t know the class*.
+And you have a ton of those. Oscar Mayer has terabytes of unlabeled hotdog footage just sitting in the basement! Surely there’s a wealth of structure just waiting to be uncovered! You can use the intuition you had above about class consistency across views---*even when you don’t know the class*.
 
 But how do you operationalize that intuition? How can you actually use the natural structure of all that unlabeled data? How can you spread that supervisory signal across your entire dataset, imbuing the right invariances even in your unlabeled records?
 
